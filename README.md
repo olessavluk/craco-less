@@ -51,6 +51,9 @@ module.exports = {
 
 You can pass an `options` object to configure the loaders and plugins. You can also pass a `modifyLessRule` callback to have full control over the Less webpack rule.
 
+- `options.modules`
+  - _Default:_ `false`
+  - Specify which rule from sass loader to inherit. With CSS Modules or default one
 - `options.styleLoaderOptions`
   - _Default:_ `{}`
   - [View the `style-loader` options](https://webpack.js.org/loaders/style-loader/#options)
@@ -104,22 +107,15 @@ module.exports = {
 
 ## CSS Modules
 
-You can configure the [`css-loader` options](https://webpack.js.org/loaders/css-loader/#options) to set up CSS modules. For example:
+You can pass `modules` option to be `true` to inherit from SASS loader with CSS Modules enabled. For example:
 
 ```js
 const CracoLessPlugin = require("craco-less");
 
 module.exports = {
   plugins: [
-    {
-      plugin: CracoLessPlugin,
-      options: {
-        cssLoaderOptions: {
-          modules: true,
-          localIdentName: "[local]_[hash:base64:5]"
-        }
-      }
-    }
+    { plugin: CracoLessPlugin },
+    { plugin: CracoLessPlugin, modules: true }
   ]
 };
 ```
